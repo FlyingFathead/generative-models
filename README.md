@@ -17,10 +17,8 @@ The official Stability-AI generative models repository had several critical bugs
    ```
    git clone https://github.com/FlyingFathead/generative-models.git
    ```
-2. Install the dependencies:
-   ```
-   pip install -r requirements/pt2.txt
-   ```
+2. Install otherwise as in original instructions (see below)
+
 3. Ensure FFmpeg is installed and available in your system’s PATH:
    ```
    sudo apt install ffmpeg
