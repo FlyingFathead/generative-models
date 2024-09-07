@@ -1,9 +1,52 @@
+# Stability-AI Generative Models Fork for Stable Video SV3D
+
+**Why this fork?**  
+The official Stability-AI generative models repository had several critical bugs and unimplemented features that hindered GPU performance when low VRAM usage or CPU-only mode functionality was required when using i.e. SV3D. it also fixes the MP4 video output bug that basically rendered the original code unusable. This fork addresses those issues and provides a stable, working version for developers.
+
+## Key Fixes and Improvements:
+- **Low VRAM Mode Implemented**: The original repository had a placeholder for low VRAM mode but no actual implementation. This fork now includes a working low VRAM mode (`float32` to `float16`), tested on RTX 3060 with 12GB VRAM, allowing models to run more efficiently on lower-memory GPUs.
+  
+- **CPU-Only Mode**: An option to run the model entirely on CPU for users without CUDA-compatible GPUs, though at slower speeds.
+
+- **Fixed MP4 Video Output**: MP4 output was broken due to incorrect integration with FFmpeg and imageio. This fork fixes the video generation pipeline, ensuring proper video output.
+
+- **General Stability Improvements**: Several optimizations to prevent unnecessary crashes, improve model loading, and handle edge cases for more reliable execution.
+
+## How to Install and Use
+1. Clone this fork:
+   ```
+   git clone https://github.com/FlyingFathead/generative-models.git
+   ```
+2. Install the dependencies:
+   ```
+   pip install -r requirements/pt2.txt
+   ```
+3. Ensure FFmpeg is installed and available in your system’s PATH:
+   ```
+   sudo apt install ffmpeg
+   ```
+4. Run your models with the new low VRAM and CPU modes:
+   - To enable **low VRAM mode**, set `lowvram_mode = True` in `streamlit_helpers.py`.
+   - To force **CPU-only mode**, set `USE_CUDA = False` in `streamlit_helpers.py`.
+
+## Future Plans:
+- More optimization for memory-intensive processes.
+- Simplification of the setup process (possible Dockerization).
+- Ongoing bug fixes and feature updates as needed.
+
+The bugfixes in this fork have been submitted to the original repository as PR's. Nonetheless, feel free to open an issue if you encounter any problems or have suggestions.
+
+---
+
+_(original README below)_
+
+---
+
 # Generative Models by Stability AI
 
 ![sample1](assets/000.jpg)
 
 ## News
-
 
 **July 24, 2024**
 - We are releasing **[Stable Video 4D (SV4D)](https://huggingface.co/stabilityai/sv4d)**, a video-to-4D diffusion model for novel-view video synthesis. For research purposes:
