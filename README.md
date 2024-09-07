@@ -4,8 +4,8 @@
 The official Stability-AI generative models repository had several critical bugs and unimplemented features that hindered GPU performance when low VRAM usage or CPU-only mode functionality was required when using i.e. SV3D. it also fixes the MP4 video output bug that basically rendered the original code unusable. This fork addresses those issues and provides a stable, working version for developers.
 
 ## Key Fixes and Improvements:
-- **Low VRAM Mode Implemented**: The original repository had a placeholder for low VRAM mode but no actual implementation. This fork now includes a working low VRAM mode (`float32` to `float16`), tested on RTX 3060 with 12GB VRAM, allowing models to run more efficiently on lower-memory GPUs.
-  
+- **Low VRAM Mode Implemented**: The original repository had a placeholder for low VRAM mode in its `video_sampling` and associated `streamlit_helpers.py` but no actual implementation, which made i.e. running SV3D impossible by default on consumer-grade cards. This fork now includes a working low VRAM mode (`float32` to `float16`) for SV3D (probably works in SV4D as well), tested on RTX 3060 with 12GB VRAM, allowing models to run more efficiently on lower-memory GPUs.
+
 - **CPU-Only Mode**: An option to run the model entirely on CPU for users without CUDA-compatible GPUs, though at slower speeds.
 
 - **Fixed MP4 Video Output**: MP4 output was broken due to incorrect integration with FFmpeg and imageio. This fork fixes the video generation pipeline, ensuring proper video output.
