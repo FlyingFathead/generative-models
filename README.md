@@ -37,7 +37,8 @@ _(maybe)_
 
 Bug fixes in this fork have been submitted as PRs to the original repository. Feel free to open an issue if you encounter problems or have suggestions.
 
-- **Note on the CPU-Only Mode**: It is currently **not** implemented; the switch for that is more or less a placeholder. The reason why the CPU-only mode is unavailable is due to dependencies and tensor/compute device handling, which fall outside the project's scope and require CUDA. Implementing CPU-only support would demand significant rewrites. Running the model without CUDA-compatible hardware is not supported at this time. If the low-VRAM mode isn't sufficient, you'll need to fork the codebase yourself to fully support CPU-only processing using only `float32`, without mixed-precision.
+- **Note on the CPU-Only Mode**: It is currently **not** implemented; the switch for that is more or less a placeholder. The reason why the CPU-only mode is unavailable is due to dependencies and tensor/compute device handling, which fall outside the project's scope and require CUDA. Implementing CPU-only support would demand significant rewrites. Running the model without CUDA-compatible hardware is not supported at this time.
+- If the low-VRAM mode isn't sufficient, you'll need to fork the codebase yourself to fully support CPU-only processing using only `float32`, without mixed-precision.
 
 ---
 
