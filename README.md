@@ -21,6 +21,13 @@ The official Stability-AI generative models repository had several critical bugs
    ```
 4. Run your models using the new low VRAM mode:
    - To enable **low VRAM mode**, set `lowvram_mode = True` in `streamlit_helpers.py`.
+   - **NOTE:** This is set to `False` by default, so you need to edit it to `True` manually.
+
+5. You can run the software with i.e. the included install script; `run_stable_diffusion_video_ui.sh`:
+  ```
+  ./run_stable_diffusion_video_ui.sh
+  ```
+  (the script has a few tweaks for low-VRAM users, i.e.: `export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128`)
 
 ## Future Plans:
 _(maybe)_
