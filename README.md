@@ -1,38 +1,36 @@
-# Stability-AI Generative Models Fork for Stable Video SV3D
-
 **Why this fork?**  
-The official Stability-AI generative models repository had several critical bugs and unimplemented features that hindered GPU performance when low VRAM usage or CPU-only mode functionality was required when using i.e. SV3D. it also fixes the MP4 video output bug that basically rendered the original code unusable. This fork addresses those issues and provides a stable, working version for developers.
+The official Stability-AI generative models repository had several critical bugs and missing features that significantly impacted GPU performance when low on VRAM, especially when running SV3D. Additionally, the MP4 video output bug made the original code nearly unusable. This fork addresses these issues, providing a stable, functional version for developers.
 
 ## Key Fixes and Improvements:
-- **Low VRAM Mode Implemented**: The original repository had a placeholder for low VRAM mode in its `video_sampling` and associated `streamlit_helpers.py` but no actual implementation, which made i.e. running SV3D impossible by default on consumer-grade cards. This fork now includes a working low VRAM mode (`float32` to `float16`) for SV3D (probably works in SV4D as well), tested on RTX 3060 with 12GB VRAM, allowing models to run more efficiently on lower-memory GPUs.
+- **Low VRAM Mode Implemented**: The original repository included a placeholder for low VRAM mode in `video_sampling` and `streamlit_helpers.py` but lacked an actual implementation. This made running SV3D on consumer-grade cards nearly impossible by default. The fork introduces a fully functional low VRAM mode (`float32` to `float16`), tested on an RTX 3060 with 12GB VRAM, making it possible to run models efficiently on lower-memory GPUs.
 
-- **CPU-Only Mode**: An option to run the model entirely on CPU for users without CUDA-compatible GPUs, though at slower speeds.
+- **Fixed MP4 Video Output**: The MP4 output was broken due to improper integration with FFmpeg and imageio. This fork corrects the video generation pipeline, ensuring proper MP4 video output.
 
-- **Fixed MP4 Video Output**: MP4 output was broken due to incorrect integration with FFmpeg and imageio. This fork fixes the video generation pipeline, ensuring proper video output.
-
-- **General Stability Improvements**: Several optimizations to prevent unnecessary crashes, improve model loading, and handle edge cases for more reliable execution.
+- **General Stability Improvements**: Various optimizations were made to prevent crashes, improve model loading, and handle edge cases, resulting in more reliable execution.
 
 ## How to Install and Use
 1. Clone this fork:
    ```
    git clone https://github.com/FlyingFathead/generative-models.git
    ```
-2. Install otherwise as in original instructions (see below)
+2. Install dependencies as outlined in the original instructions (see below).
 
 3. Ensure FFmpeg is installed and available in your system’s PATH:
    ```
    sudo apt install ffmpeg
    ```
-4. Run your models with the new low VRAM and CPU modes:
+4. Run your models using the new low VRAM mode:
    - To enable **low VRAM mode**, set `lowvram_mode = True` in `streamlit_helpers.py`.
-   - To force **CPU-only mode**, set `USE_CUDA = False` in `streamlit_helpers.py`.
 
 ## Future Plans:
-- More optimization for memory-intensive processes.
-- Simplification of the setup process (possible Dockerization).
+_(maybe)_
+- Further optimization for memory-intensive processes.
+- Simplified setup process (possible Dockerization).
 - Ongoing bug fixes and feature updates as needed.
 
-The bugfixes in this fork have been submitted to the original repository as PR's. Nonetheless, feel free to open an issue if you encounter any problems or have suggestions.
+Bug fixes in this fork have been submitted as PRs to the original repository. Feel free to open an issue if you encounter problems or have suggestions.
+
+- **Note on the CPU-Only Mode**: It is currently **not** implemented; the switch for that is more or less a placeholder. The reason why the CPU-only mode is unavailable is due to dependencies and tensor/compute device handling, which fall outside the project's scope and require CUDA. Implementing CPU-only support would demand significant rewrites. Running the model without CUDA-compatible hardware is not supported at this time. If the low-VRAM mode isn't sufficient, you'll need to fork the codebase yourself to fully support CPU-only processing using only `float32`, without mixed-precision.
 
 ---
 
